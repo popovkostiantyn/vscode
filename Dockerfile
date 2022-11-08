@@ -66,19 +66,9 @@ ENV LANG=C.UTF-8 \
     GIT_EDITOR="code --wait" \
     OPENVSCODE_SERVER_ROOT=${OPENVSCODE_SERVER_ROOT}
 
-# RUN code --install-extension ms-azuretools.vscode-azurefunctions
-# RUN code --install-extension ms-vscode.azure-account
-# RUN code --install-extension ms-azuretools.vscode-azureresourcegroups
-# RUN code --install-extension ms-azuretools.vscode-azureappservice
-# RUN code --install-extension ms-vscode.azurecli
-# RUN code --install-extension dbaeumer.vscode-eslint
-# RUN code --install-extension eamodio.gitlens
-# RUN code --install-extension wix.vscode-import-cost
-# RUN code --install-extension shd101wyy.markdown-preview-enhanced
-# RUN code --install-extension rangav.vscode-thunder-client
-# RUN code --install-extension shardulm94.trailing-spaces
-
 # Default exposed port if none is specified
 EXPOSE 3000
+
+COPY /.openvscode-server/extensions/ /home/workspace/.openvscode-server/extensions/
 
 ENTRYPOINT [ "/bin/sh", "-c", "exec ${OPENVSCODE_SERVER_ROOT}/bin/openvscode-server --host 0.0.0.0 --without-connection-token \"${@}\"", "--" ]
